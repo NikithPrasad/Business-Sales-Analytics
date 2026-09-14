@@ -1,0 +1,32 @@
+// Create these measures in the Sales table unless stated otherwise.
+
+Total Sales = SUM(Sales[Sales])
+
+Total Profit = SUM(Sales[Profit])
+
+Total Quantity = SUM(Sales[Quantity])
+
+Order Count = DISTINCTCOUNT(Sales[Order ID])
+
+Customer Count = DISTINCTCOUNT(Sales[Customer ID])
+
+Profit Margin = DIVIDE([Total Profit], [Total Sales])
+
+Sales per Order = DIVIDE([Total Sales], [Order Count])
+
+Profit per Order = DIVIDE([Total Profit], [Order Count])
+
+Average Discount = AVERAGE(Sales[Discount])
+
+Average Shipping Days = AVERAGE(Sales[Shipping Days])
+
+Sales Previous Year = CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
+
+Profit Previous Year = CALCULATE([Total Profit], DATEADD('Date'[Date], -1, YEAR))
+
+Sales YoY % = DIVIDE([Total Sales] - [Sales Previous Year], [Sales Previous Year])
+
+Profit YoY % = DIVIDE([Total Profit] - [Profit Previous Year], [Profit Previous Year])
+
+Loss-Making Products =
+COUNTROWS(FILTER(VALUES(Sales[Product Name]), [Total Profit] < 0))
